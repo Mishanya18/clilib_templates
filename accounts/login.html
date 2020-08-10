@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>Login</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-md-center mt-5">
+      <div class="col-4 mt-5 pt-5">
+
+        <img src="https://o2.d-platforms.ru/brand/logo.svg" class="img-thumbnail border-0 my-3">
+
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" placeholder="username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">@d-platforms.ru</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="{{ form.password.id_for_label }}" type="password" name="{{ form.password.html_name }}" placeholder="password" >
+          </div>
+          <button type="submit" class="btn btn-outline-success">Войти</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'clilib/spokesmans/spokesmans_base_template.html' %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3> Удаление предстваителя клиента </h3>
+    </div>
+  </div>
+</div>
+
+<form action="{% url 'spokesmans_delete_url' pk=spokesman.id %}" method="post" class="ml-5 pl-5">
+  {% csrf_token %}
+  <h3 class="mb-3">Вы уверены?</h3>
+  <button type="submit" class="btn btn-outline-danger">Удалить</button>
+  <a href="{% url 'spokesmans_url' %}" class="btn btn-outline-info">Отмена</a>
+</form>
+{% endblock %}

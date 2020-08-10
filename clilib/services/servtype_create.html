@@ -1,0 +1,29 @@
+{% extends 'clilib/services/services_base_template.html' %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3> Добавление услуги </h3>
+    </div>
+  </div>
+</div>
+
+<form action="{% url 'services_create_url' %}" method="post">
+  {% csrf_token %}
+  <div class="form-row mx-5 p-0">
+    <div class="form-group col-md-8">
+      <label for="inputTitle">Название</label>
+      {{ form.title }}
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputUnit_of_measure">Единица измерения</label>
+      {{ form.unit_of_measure }}
+    </div>
+  </div>
+  <div class="form-row mx-5 p-0">
+    <button type="submit" class="btn btn-outline-success mx-2">Добавить</button>
+    <a href="{% url 'services_url' %}" class="btn btn-outline-secondary">Отмена</a>
+  </div>
+</form>
+{% endblock %}
