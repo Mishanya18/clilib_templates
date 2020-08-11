@@ -1,14 +1,10 @@
 {% extends 'clilib/services/services_base_template.html' %}
 
-{% block content %}
-<div class="container my-5">
-  <div class="row">
-    <div class="col-lg-12">
-      <h3> Удаление типа услуги </h3>
-    </div>
-  </div>
-</div>
+{% block header %}
+<h4> Удаление типа услуги </h4>
+{% endblock %}
 
+{% block content %}
 <form action="{% url 'services_delete_url' pk=servtype.id %}" method="post" class="ml-5 pl-5">
   {% csrf_token %}
   <h3 class="mb-3">Вы уверены?</h3>

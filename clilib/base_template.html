@@ -21,9 +21,28 @@
         </div>
       </div>
       <div class="col-2 mx-0 px-0">
-
       </div>
       <div class="col-10 mr-0 pr-0">
+        <div class="container mt-3 mb-2">
+          <div class="row">
+            <div class="col-lg-10 d-flex">
+              {% block header %}
+              {% endblock %}
+            </div>
+            <div class="col-lg-2">
+              <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle py-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ request.user.first_name }}
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Сменить пароль</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout_url' %}">Выйти</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {% block content %}
         {% endblock %}
       </div>
