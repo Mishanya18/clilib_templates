@@ -33,37 +33,31 @@
         </svg>
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="{% url 'clients_list_test_url' %}">В тесте</a>
-        <a class="dropdown-item" href="{% url 'clients_list_staff_url' %}">Служебные</a>
-        <a class="dropdown-item" href="{% url 'clients_list_url' %}">Все</a>
+        <a class="dropdown-item" href="{% url 'clients_test_url' %}">В тесте</a>
+        <a class="dropdown-item" href="{% url 'clients_staff_url' %}">Служебные</a>
+        <a class="dropdown-item" href="{% url 'clients_url' %}">Все</a>
       </div>
     </div>
   </div>
 </div>
-<div class="container ml-0 pl-0">
-  <div class="row">
-    <div class="col-lg-12">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Имя</th>
-            <th scope="col">Номер контракта</th>
-            <th scope="col">Менеджер</th>
-            <th scope="col">Дата создания</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for client, spokesmans in companies.items %}
-          <tr>
-            <td><a href="{{ client.get_absolute_url }}">{{ client.title }}</a></td>
-            <td>{{ client.contract_number }}</td>
-            <td>{{ client.manager }}</td>
-            <td>{{ client.creation_date }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+<div class="row row-cols-1 row-cols-md-3 mr-0">
+  {% for client, spokesmans in companies.items %}
+  <div class="col mb-4">
+    <div class="card">
+      <a href="{{ client.get_absolute_url }}"><div class="card-header h5">{{ client.title }}</div></a>
+      <div class="card-body ml-2">
+        <p class="card-text mb-1 ml-2">Номер контракта:</p>
+        <p class="card-text ml-5">{{ client.contract_number }}</p>
+        <p class="card-text mb-1 ml-2">Менеджер:</p>
+        <p class="card-text ml-5"> {{ client.manager }}</p>
+        <p class="card-text mb-1 ml-2">Представитель:</p>
+        {% for spokesman in spokesmans %}
+          <p class="card-text ml-5 mb-0"> {{ spokesman }}</p>
+        {% endfor %}
+      </div>
+      <div class="card-footer text-muted">{{ client.creation_date }}</div>
     </div>
   </div>
+  {% endfor %}
 </div>
 {% endblock %}
