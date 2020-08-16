@@ -1,11 +1,11 @@
 {% extends 'clilib/clients/clients_base_template.html' %}
 
 {% block header %}
-<h4> Изменение услуги у клиента </h4>
+<h4> Добавление услуг клиенту {{ client.title }} </h4>
 {% endblock %}
 
 {% block content %}
-<form action="{% url 'clients_update_services_url' pk=client.id sk=service.id %}" method="post">
+<form action="{% url 'clients_add_services_url' pk=client.id %}" method="post">
   {% csrf_token %}
   <div class="form-row mx-5 p-0">
     <div class="form-group col-md-6">
@@ -21,10 +21,9 @@
     <div class="form-group col-md-6">
       <label for="inputClient">Компания</label>
       {{ form.client }}
-      {{ form.offered.as_hidden }}
     </div>
     <div class="form-group col-md-6 mt-4 pt-2">
-      <button type="submit" class="btn btn-outline-success mx-2">Изменить</button>
+      <button type="submit" class="btn btn-outline-success mx-2">Добавить</button>
       <a href="{% url 'client_detail_url' pk=client.id %}" class="btn btn-outline-secondary">Отмена</a>
     </div>
   </div>

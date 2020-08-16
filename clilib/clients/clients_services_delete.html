@@ -1,0 +1,14 @@
+{% extends 'clilib/clients/clients_base_template.html' %}
+
+{% block header %}
+<h4> Удаление услуги у клиента </h4>
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'clients_delete_services_url' pk=client.id sk=service.id %}" method="post" class="ml-5 pl-5">
+  {% csrf_token %}
+  <h3 class="mb-3">Вы уверены?</h3>
+  <button type="submit" class="btn btn-outline-danger">Удалить</button>
+  <a href="{% url 'client_detail_url' pk=client.id %}" class="btn btn-outline-info">Отмена</a>
+</form>
+{% endblock %}
