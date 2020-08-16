@@ -8,18 +8,23 @@
 <form action="{% url 'services_create_url' %}" method="post">
   {% csrf_token %}
   <div class="form-row mx-1 p-0">
-    <div class="form-group col-md-8">
-      <label for="inputTitle">Название</label>
+    <div class="form-group col-md-12">
+      <label for="inputTitle">Описание</label>
       {{ form.title }}
-    </div>
-    <div class="form-group col-md-4">
-      <label for="inputUnit_of_measure">Единица измерения</label>
-      {{ form.unit_of_measure }}
     </div>
   </div>
   <div class="form-row mx-1 p-0">
-    <button type="submit" class="btn btn-outline-success mx-2">Добавить</button>
-    <a href="{% url 'services_url' %}" class="btn btn-outline-secondary">Отмена</a>
-  </div>
-</form>
+    <div class="form-group col-md-6">
+      <label for="inputTitle">Название</label>
+      {{ form.short_name }}
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputUnit_of_measure">Единица измерения</label>
+      {{ form.unit_of_measure }}
+    </div>
+    <div class="form-group col-md-3 mt-4 pt-2">
+      <button type="submit" class="btn btn-outline-success mx-2">Добавить</button>
+      <a href="{% url 'services_url' %}" class="btn btn-outline-secondary">Отмена</a>
+    </div>
+  </div></form>
 {% endblock %}

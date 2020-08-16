@@ -19,6 +19,7 @@
           <thead>
             <tr>
               <th scope="col">Название</th>
+              <th scope="col">Описание</th>
               <th scope="col">Единица измерения</th>
               <th scope="col">Действия</th>
             </tr>
@@ -26,6 +27,7 @@
           <tbody>
             {% for service in services_list %}
             <tr>
+              <td>{{ service.short_name }}</td>
               <td>{{ service.title }}</td>
               <td>{{ service.unit_of_measure }}</td>
               <td>
