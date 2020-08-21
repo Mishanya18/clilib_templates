@@ -1,32 +1,59 @@
 {% extends 'clilib/clients/clients_base_template.html' %}
+{% load static %}
 
 {% block header %}
-<h4> Добавление услуг клиенту {{ client.title }} </h4>
+<h4> Редактирование услуг клиенту {{ client.title }} </h4>
 {% endblock %}
 
 {% block content %}
 <form action="{% url 'clients_add_services_url' pk=client.id %}" method="post">
   {% csrf_token %}
-  <div class="form-row mx-5 p-0">
-    <div class="form-group col-md-6">
-      <label for="inputType">Услуга</label>
-      {{ form.type }}
+  {{ serviceformset.management_form }}
+
+  {% for form in serviceformset.forms %}
+    <div class="form-row mx-5 p-0 formset_row">
+      {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+      {% endfor %}
+      <div class="form-group col-md-6">
+        <label for="inputType">Услуга</label>
+        {{ form.type }}
+        {% if form.type.errors %}
+          {% for error in form.type.errors %}
+            <p class="text-danger">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputAmount">Количество</label>
+        {{ form.amount }}
+        {% if form.amount.errors %}
+          {% for error in form.amount.errors %}
+            <p class="text-danger">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+        <input type="hidden" id="{{ form.offered.id_for_label }}"  name="{{ form.offered.html_name }}" value="True">
+      </div>
+      {{ form.DELETE }}
     </div>
+  {% endfor %}
+
+  <div class="form-row mt-4 p-0">
     <div class="form-group col-md-6">
-      <label for="inputAmount">Количество</label>
-      {{ form.amount }}
-    </div>
-  </div>
-  <div class="form-row mx-5 p-0">
-    <div class="form-group col-md-6">
-      <label for="inputClient">Компания</label>
-      {{ form.client }}
-      {{ form.offered.as_hidden }}
-    </div>
-    <div class="form-group col-md-6 mt-4 pt-2">
-      <button type="submit" class="btn btn-outline-success mx-2">Добавить</button>
+      <button type="submit" class="btn btn-outline-success">Сохранить изменения</button>
       <a href="{% url 'client_detail_url' pk=client.id %}" class="btn btn-outline-secondary">Отмена</a>
     </div>
   </div>
 </form>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="{% static 'formset/jquery.formset.js' %}"></script>
+<script type="text/javascript">
+    $('.formset_row').formset({
+        addText: 'Добавить услугу',
+        addCssClass: 'btn btn-outline-primary mx-5 my-2',
+        deleteText: 'Удалить',
+        deleteCssClass: 'btn btn-outline-primary',
+        prefix: 'service_set'
+    });
+</script>
 {% endblock %}
